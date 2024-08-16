@@ -33,3 +33,5 @@ PAYMENT_METHOD_CHOICES = [
         ('Credit Card', _('Credit Card')),
         ('PayPal', _('PayPal')),
 ]
+
+REGEX_PATTERN = r"^[\w]+$"

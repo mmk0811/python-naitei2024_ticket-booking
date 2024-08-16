@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 from .constants import (
     MAX_LENGTH_NAME, GENDER_CHOICES, MAX_LENGTH_CHOICES, BOOKING_STATUS,
     STATUS_CHOICES, ROLE_CHOICES, CARD_TYPE_CHOICES, PAYMENT_METHOD_CHOICES
@@ -7,12 +7,20 @@ from .constants import (
 from django.utils import timezone
 from django.core.validators import RegexValidator, MinLengthValidator
 from datetime import date
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
+from django.contrib.auth.models import AbstractUser
+
+class Account(AbstractUser):
+    account_id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=MAX_LENGTH_NAME, unique=True, validators=[MinLengthValidator(6), RegexValidator(regex=r"^[\w]+$")])
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
     first_name = models.CharField(
-        max_length=MAX_LENGTH_NAME, verbose_name=_('first name'))
+        max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='New')
     last_name = models.CharField(
-        max_length=MAX_LENGTH_NAME, verbose_name=_('last name'))
+        max_length=MAX_LENGTH_NAME, verbose_name=_('last name'), default='User')
     gender = models.CharField(
         max_length=MAX_LENGTH_CHOICES,
         choices=GENDER_CHOICES,
@@ -20,24 +28,11 @@ class User(models.Model):
         null=True,
         verbose_name=_('gender')
     )
-    date_of_birth = models.DateField(),
-    passport_number = models.CharField(max_length=MAX_LENGTH_NAME, unique=True),
-    nationality = models.CharField(max_length=MAX_LENGTH_NAME)
+    date_of_birth = models.DateField(default=timezone.now)
+    passport_number = models.CharField(max_length=MAX_LENGTH_NAME, unique=True, default="N12345678")
+    nationality = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnamese'))
 
-    def full_name(self):
-        return f"{self.first_name} {self.last_name}"
-    
-    def __str__(self):
-        return self.full_name()
-class Account(models.Model):
-    account_id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=20)
-    password_hash = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
+    REQUIRED_FIELDS = ['email', 'phone_number']
 
     def set_status(self, new_status):
         if new_status in dict(self.STATUS_CHOICES).keys():
@@ -53,6 +48,9 @@ class Account(models.Model):
     def update_last_login(self):
         self.last_login = timezone.now()
         self.save()
+
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
         return f"{self.email} ({self.get_role_display()})"
@@ -133,7 +131,7 @@ class FlightTicketType(models.Model):
 
 class Card(models.Model):
     card_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    user = models.ForeignKey('Account', on_delete=models.CASCADE)
     card_number = models.CharField(max_length=16)
     cardholder_name = models.CharField(max_length=MAX_LENGTH_NAME)
     expiry_date = models.DateField()
@@ -208,7 +206,3 @@ class Voucher(models.Model):
 
     def __str__(self):
         return f"Voucher {self.code} - {self.description} - Expires on {self.expiry_date}"
-
-
-
-    

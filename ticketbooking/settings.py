@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.utils.translation import ugettext_lazy as _
 
 load_dotenv()
 
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -114,6 +116,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('en', _('English')),
+    ('vi', _('Vietnamese')),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -130,3 +141,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'booking.Account'
