@@ -1,0 +1,95 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <style>
+        .background-banner {
+            background-image: url("{% static 'images/welcome/welcome-banner.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            padding-top: 120px;
+            padding-bottom: 20px;
+            min-height: 100vh;
+        }
+
+        .model-form {
+            margin-bottom: 20px;
+        }
+
+        .filter-form {
+            margin-bottom: 20px;
+        }
+
+        .filter-form select,
+        .filter-form input {
+            margin-right: 10px;
+        }
+    </style>
+    <div class="background-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="model-form">
+                        <div style="text-align: center">
+                            <h3>{% trans "All Flights" %}</h3><br>
+                        </div>
+
+                        <!-- Filter Form -->
+                        <form method="GET" class="filter-form">
+                            <div class="form-group">
+                                <label for="departure_date">{% trans "Departure Date" %}:</label>
+                                <input type="date" id="departure_date" name="departure_date" value="{{ request.GET.departure_date }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="departure_location">{% trans "Departure Location" %}:</label>
+                                <select id="departure_location" name="departure_location">
+                                    <option value="">{% trans "All Locations" %}</option>
+                                    {% for city in airports %}
+                                        <option value="{{ city }}" {% if request.GET.departure_location == city %}selected{% endif %}>{{ city }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">{% trans "Apply Filters" %}</button>
+                        </form>
+
+                        {% if flights %}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">{% trans "Flight Number" %}</th>
+                                            <th scope="col">{% trans "Departure City" %}</th>
+                                            <th scope="col">{% trans "Arrival City" %}</th>
+                                            <th scope="col">{% trans "Departure Time" %}</th>
+                                            <th scope="col">{% trans "Arrival Time" %}</th>
+                                            <th scope="col">{% trans "Price" %}</th>
+                                            <th scope="col">{% trans "Details" %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for flight in flights %}
+                                            <tr>
+                                                <td>{{ flight.flight_number }}</td>
+                                                <td>{{ flight.departure_airport.city }}</td>
+                                                <td>{{ flight.arrival_airport.city }}</td>
+                                                <td>{{ flight.departure_time }}</td>
+                                                <td>{{ flight.arrival_time }}</td>
+                                                <td>${{ flight.base_price }}</td>
+                                                <td><a href="{% url 'flight_detail' flight_id=flight.flight_id %}" class="btn btn-primary btn-sm">View Details</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div style="text-align: center">
+                                <p>{% trans "No flights available." %}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

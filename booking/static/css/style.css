@@ -240,6 +240,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #4e4ffa;}
     max-width: 735px;
     margin: 0 auto;
 }
+.background-banner{
+    background-image: url("{% static 'images/welcome/welcome-banner.jpg' %}")
+}
 .welcome-btn {
     display: inline-block;
     width: 230px;
@@ -766,5 +769,85 @@ nav.navbar.bootsnav .navbar-toggle i{color: #4e4ffa;}
 }
 
 .custom-title {
+    text-align: center;
+}
+
+.table-responsive {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.table th, .table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease; 
+}
+
+.table .btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.table .btn:hover {
+    background-color: #0056b3; 
+}
+.flight-details {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.flight-details h1 {
+    color: #007bff; /* Màu xanh nổi bật */
+    font-size: 2.5rem; /* Kích thước chữ lớn */
+    font-weight: bold; /* Đậm chữ */
+    text-align: center; /* Căn giữa */
+    margin-bottom: 20px;
+}
+
+.flight-details h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.flight-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.flight-details .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+}    
+
+.btn-back {
+    margin-top: 20px;
+    display: block;
     text-align: center;
 }

@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <style>
+        .background-banner {
+            background-image: url("{% static 'images/welcome/welcome-banner.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            padding-top: 120px;
+            padding-bottom: 20px;
+            min-height: 100vh;
+        }
+
+
+    </style>
+    <div class="background-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flight-details">
+                        <h1>{% trans "Flight" %} {{ flight.flight_number }}</h1>
+
+                        <h2>{% trans "Arrival Information" %}</h2>
+                        <p><strong>{% trans "Airport" %}:</strong> {{ departure_airport.name }}</p>
+                        <p><strong>{% trans "City" %}:</strong> {{ departure_airport.city }}</p>
+                        <p><strong>{% trans "Country" %}:</strong> {{ departure_airport.country }}</p>
+                        <p><strong>{% trans "Departure Time" %}:</strong> {{ flight.departure_time }}</p>
+
+                        <h2>Arrival Information</h2>
+                        <p><strong>{% trans "Airport" %}:</strong> {{ arrival_airport.name }}</p>
+                        <p><strong>{% trans "City" %}:</strong> {{ arrival_airport.city }}</p>
+                        <p><strong>{% trans "Country" %}:</strong> {{ arrival_airport.country }}</p>
+                        <p><strong>{% trans "Arrival Time" %}:</strong> {{ flight.arrival_time }}</p>
+
+                        <h3 class="price">{% trans "Base Price" %}: ${{ flight.base_price }}</h3>
+
+                        <div class="btn-back">
+                            <a href="{% url 'flight_list' %}" class="btn btn-secondary">{% trans "Back to Flight List" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
