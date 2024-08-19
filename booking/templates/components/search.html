@@ -1,0 +1,102 @@
+{% load i18n %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="model-search-content">
+                <div class="row">
+                    <!-- Trip Type Selection -->
+                    <div class="col-md-offset-1 col-md-1.5 col-sm-12">
+                        <div class="single-model-search">
+                            <h1>Flights:</h1>
+                        </div>
+                        <div class="single-model-search">
+                            <label>
+                                <input type="radio" name="tripType" value="round" {% if trip_type != 'oneway' %}checked{% endif %}>
+                                {% trans "Round" %}
+                            </label>
+                            <label>
+                                <input type="radio" name="tripType" value="oneway" {% if trip_type == 'oneway' %}checked{% endif %}>
+                                {% trans "Oneway" %}
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Airport Selection -->
+                    <div class="col-md-offset-1 col-md-2 col-sm-12">
+                        <div class="single-model-search">
+                            <h2>{% trans "FROM:" %}</h2>
+                            <div class="model-select-icon">
+                                <input type="text" id="from-airport" class="form-control" placeholder="Search Airport"
+                                    value="{{ from_airport }}">
+                                <ul id="from-airport-suggestions" class="airport-suggestions"></ul>
+                            </div>
+                        </div>
+
+                        <div class="single-model-search">
+                            <h2>{% trans "TO:" %}</h2>
+                            <div class="model-select-icon">
+                                <input type="text" id="to-airport" class="form-control" placeholder="Search Airport"
+                                    value="{{ to_airport }}">
+                                <ul id="to-airport-suggestions" class="airport-suggestions"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date Selection -->
+                    <div class="col-md-offset-1 col-md-2 col-sm-12">
+                        <div class="single-model-search">
+                            <h2>{% trans "DEPARTURE DATE:" %}</h2>
+                            <div class="model-select-icon">
+                                <input type="date" id="departure-date" class="form-control"
+                                    value="{{ departure_date }}">
+                            </div>
+                        </div>
+                        <div class="single-model-search">
+                            <h2>{% trans "RETURN DATE:" %}</h2>
+                            <div class="model-select-icon">
+                                <input type="date" id="return-date" class="form-control" value="{{ return_date }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Number of Passengers and Chair Type -->
+                    <div class="col-md-offset-1 col-md-2 col-sm-12">
+                        <div class="single-model-search">
+                            <h2>{% trans "Number of Passengers:" %}</h2>
+                            <div class="model-select-icon">
+                                <input type="number" id="num-passengers" class="form-control"
+                                    value="{{ num_passengers }}" min="1">
+                            </div>
+                        </div>
+
+                        {% if ticket_types %}
+                        <div class="single-model-search">
+                            <h2>{% trans "Chair Type:" %}</h2>
+                            <div class="model-select-icon">
+                                <select id="chair-type" class="form-control">
+                                    {% for ticket_type in ticket_types %}
+                                    <option value="{{ ticket_type.name }}" {% if chair_type == ticket_type.name %}selected{% endif %}>
+                                        {{ ticket_type.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="col-md-2 col-sm-12">
+                        <div class="single-model-search text-center">
+                            <button class="welcome-btn model-search-btn">
+                                {% trans "Search" %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

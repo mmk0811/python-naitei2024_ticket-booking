@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.core.validators import RegexValidator, MinLengthValidator
 from datetime import date
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Min, Q, F
 
 class Account(AbstractUser):
     account_id = models.AutoField(primary_key=True)
@@ -63,6 +64,11 @@ class Airport(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.airport_code})"
+    
+    def get_airports():
+        """Retrieve all airports from the database."""
+        airports = Airport.objects.all().values("airport_code", "name", "city", "country")
+        return list(airports)
 
 class Flight(models.Model):
     flight_id = models.AutoField(primary_key=True)
@@ -71,7 +77,6 @@ class Flight(models.Model):
     arrival_airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrivals')
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
-    base_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def get_duration(self):
         """Calculate the flight duration."""
@@ -91,15 +96,9 @@ class Flight(models.Model):
 class TicketType(models.Model):
     ticket_type_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=MAX_LENGTH_NAME)
-    multiplier = models.DecimalField(max_digits=5, decimal_places=2)
-    seat_percentage = models.DecimalField(max_digits=5, decimal_places=2)
-
-    def calculate_price(self, base_price):
-        """Calculate the price of the ticket based on the base price and the multiplier."""
-        return base_price * self.multiplier
 
     def __str__(self):
-        return f"{self.name} (Multiplier: {self.multiplier}, Seat Percentage: {self.seat_percentage}%)"
+        return f"{self.name}"
 
 class FlightTicketType(models.Model):
     flight_ticket_types_id = models.AutoField(primary_key=True)
@@ -110,19 +109,19 @@ class FlightTicketType(models.Model):
 
     def is_seat_available(self):
         """Check if there are any available seats."""
-        return self.available_seats > 0
+        return self.available_seats
 
-    def book_seat(self):
-        """Book a seat if available."""
+    def book_seat(self, quantity=1):
+        """Book seats if available."""
         if self.is_seat_available():
-            self.available_seats -= 1
+            self.available_seats -= quantity
             self.save()
             return True
         return False
 
-    def release_seat(self):
-        """Release a booked seat."""
-        self.available_seats += 1
+    def release_seat(self, quantity=1):
+        """Release booked seats."""
+        self.available_seats += quantity
         self.save()
 
     def __str__(self):

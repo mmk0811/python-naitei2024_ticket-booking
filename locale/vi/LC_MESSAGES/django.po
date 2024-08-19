@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-19 10:41+0700\n"
+"POT-Creation-Date: 2024-08-20 17:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,280 +18,428 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\booking\constants.py:7
+#: booking/constants.py:7
 msgid "Male"
 msgstr "Nam"
 
-#: .\booking\constants.py:8
+#: booking/constants.py:8
 msgid "Female"
 msgstr "Nữ"
 
-#: .\booking\constants.py:9
+#: booking/constants.py:9
 msgid "Other"
 msgstr "Khác"
 
-#: .\booking\constants.py:13
+#: booking/constants.py:13
 msgid "Active"
 msgstr "Đang hoạt động"
 
-#: .\booking\constants.py:14
+#: booking/constants.py:14
 msgid "Suspended"
 msgstr "Bị đình chỉ"
 
-#: .\booking\constants.py:18
+#: booking/constants.py:18
 msgid "Admin"
 msgstr "Quản trị viên"
 
-#: .\booking\constants.py:19
+#: booking/constants.py:19
 msgid "Member"
 msgstr "Thành viên"
 
-#: .\booking\constants.py:23
+#: booking/constants.py:23
 msgid "Visa"
 msgstr "Visa"
 
-#: .\booking\constants.py:24
+#: booking/constants.py:24
 msgid "MasterCard"
 msgstr "MasterCard"
 
-#: .\booking\constants.py:28
+#: booking/constants.py:28
 msgid "Confirmed"
 msgstr "Đã xác nhận"
 
-#: .\booking\constants.py:29
+#: booking/constants.py:29
 msgid "Canceled"
 msgstr "Đã hủy"
 
-#: .\booking\constants.py:33
+#: booking/constants.py:33
 msgid "Credit Card"
 msgstr "Thẻ tín dụng"
 
-#: .\booking\constants.py:34
+#: booking/constants.py:34
 msgid "PayPal"
 msgstr "PayPal"
 
-#: .\booking\forms.py:13 .\booking\forms.py:14 .\booking\forms.py:26
-#: .\booking\forms.py:27
+#: booking/forms.py:13 booking/forms.py:14 booking/forms.py:26
+#: booking/forms.py:27
 msgid "Username"
 msgstr "Tên người dùng"
 
-#: .\booking\forms.py:18 .\booking\forms.py:19 .\booking\forms.py:40
-#: .\booking\forms.py:41
+#: booking/forms.py:18 booking/forms.py:19 booking/forms.py:40
+#: booking/forms.py:41
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: .\booking\forms.py:30 .\booking\forms.py:31
+#: booking/forms.py:30 booking/forms.py:31
 msgid "Email"
 msgstr "Hòm thư"
 
-#: .\booking\forms.py:35 .\booking\forms.py:36
+#: booking/forms.py:35 booking/forms.py:36
 msgid "Phone Number"
 msgstr "Số điện thoại"
 
-#: .\booking\forms.py:45 .\booking\forms.py:46
+#: booking/forms.py:45 booking/forms.py:46
 msgid "Confirm Password"
 msgstr "Nhập lại mật khẩu"
 
-#: .\booking\forms.py:59
+#: booking/forms.py:59
 msgid "Password and confirm password are not the same."
 msgstr "Mật khẩu và nhập lại mật khẩu không giống nhau."
 
-#: .\booking\models.py:21
+#: booking/models.py:21
 msgid "first name"
 msgstr "Họ"
 
-#: .\booking\models.py:23
+#: booking/models.py:23
 msgid "last name"
 msgstr "Tên"
 
-#: .\booking\models.py:29
+#: booking/models.py:29
 msgid "gender"
 msgstr "Giới tính"
 
-#: .\booking\models.py:33 .\ticketbooking\settings.py:121
+#: booking/models.py:33 ticketbooking/settings.py:121
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: .\booking\templates\components\footer.html:14
+#: booking/templates/components/footer.html:14
 msgid ""
 "Your adventure starts here—secure your flight at unbeatable prices today"
 msgstr ""
 "Hành trình của bạn bắt đầu từ đây-Đặt chuyến bay của bạn với giá cả phải "
 "chăng từ hôm nay"
 
-#: .\booking\templates\components\footer.html:24
+#: booking/templates/components/footer.html:24
 msgid "about CheapJet"
 msgstr "Về CheapJet"
 
-#: .\booking\templates\components\footer.html:26
+#: booking/templates/components/footer.html:26
 msgid "about us"
 msgstr "Về chúng tôi"
 
-#: .\booking\templates\components\footer.html:27
+#: booking/templates/components/footer.html:27
 msgid "flighteer"
 msgstr "Phi công"
 
-#: .\booking\templates\components\footer.html:28
+#: booking/templates/components/footer.html:28
 msgid "terms"
 msgstr "Chính sách"
 
-#: .\booking\templates\components\footer.html:28
+#: booking/templates/components/footer.html:28
 msgid "of booking"
 msgstr "của việc đặt vé"
 
-#: .\booking\templates\components\footer.html:35
+#: booking/templates/components/footer.html:29
+msgid "privacy policy"
+msgstr ""
+
+#: booking/templates/components/footer.html:35
 msgid "team members"
 msgstr "Thành viên nhóm"
 
-#: .\booking\templates\components\footer.html:49
+#: booking/templates/components/footer.html:49
 msgid "registration"
 msgstr "Đăng ký"
 
-#: .\booking\templates\components\footer.html:52
+#: booking/templates/components/footer.html:52
 msgid "Sign up to receive the latest promotions"
 msgstr "Đăng ký để nhận các ưu đãi mới nhất"
 
-#: .\booking\templates\components\navigation.html:22
+#: booking/templates/components/footer.html:71
+#, fuzzy
+#| msgid "contact"
+msgid "Contact us on"
+msgstr "Liên hệ"
+
+#: booking/templates/components/navigation.html:22
 msgid "home"
 msgstr "Trang chủ"
 
-#: .\booking\templates\components\navigation.html:23
+#: booking/templates/components/navigation.html:23
 msgid "booking"
 msgstr "Đặt vé"
 
-#: .\booking\templates\components\navigation.html:24
+#: booking/templates/components/navigation.html:24
 msgid "contact"
 msgstr "Liên hệ"
 
-#: .\booking\templates\components\navigation.html:26
+#: booking/templates/components/navigation.html:25
+msgid "Flights"
+msgstr "Các chuyến bay"
+
+#: booking/templates/components/navigation.html:27
 msgid "log in"
 msgstr "Đăng nhập"
 
-#: .\booking\templates\components\navigation.html:28
+#: booking/templates/components/navigation.html:29
 msgid "account"
 msgstr "Tài khoản"
 
-#: .\booking\templates\components\navigation.html:29
+#: booking/templates/components/navigation.html:30
 msgid "log out"
 msgstr "Đăng xuất"
 
-#: .\booking\templates\homepage.html:9
+#: booking/templates/components/search.html:17
+msgid "Round"
+msgstr "Khứ hồi"
+
+#: booking/templates/components/search.html:22
+msgid "Oneway"
+msgstr "Một chiều"
+
+#: booking/templates/components/search.html:30
+msgid "FROM:"
+msgstr "Từ:"
+
+#: booking/templates/components/search.html:39
+msgid "TO:"
+msgstr "Đến:"
+
+#: booking/templates/components/search.html:51
+#, fuzzy
+#| msgid "DEPARTURE DATE"
+msgid "DEPARTURE DATE:"
+msgstr "Ngày khởi hành"
+
+#: booking/templates/components/search.html:58
+#, fuzzy
+#| msgid "RETURN DATE"
+msgid "RETURN DATE:"
+msgstr "Ngày trở về"
+
+#: booking/templates/components/search.html:68
+msgid "Number of Passengers:"
+msgstr "Số lượng hành khách:"
+
+#: booking/templates/components/search.html:77
+msgid "Chair Type:"
+msgstr "Loại ghế:"
+
+#: booking/templates/components/search.html:96
+#, fuzzy
+#| msgid "search"
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: booking/templates/flight_detail.html:23
+#, fuzzy
+#| msgid "Flights"
+msgid "Flight"
+msgstr "Các chuyến bay"
+
+#: booking/templates/flight_detail.html:25
+msgid "Arrival Information"
+msgstr "Thông tin về việc đến""
+
+#: booking/templates/flight_detail.html:26
+#: booking/templates/flight_detail.html:32
+msgid "Airport"
+msgstr "Sân bay"
+
+#: booking/templates/flight_detail.html:27
+#: booking/templates/flight_detail.html:33
+msgid "City"
+msgstr "Thành phố"
+
+#: booking/templates/flight_detail.html:28
+#: booking/templates/flight_detail.html:34
+msgid "Country"
+msgstr "Đất nước"
+
+#: booking/templates/flight_detail.html:29
+#: booking/templates/flight_list.html:64
+msgid "Departure Time"
+msgstr "Thời gian khởi hành"
+
+#: booking/templates/flight_detail.html:35
+#: booking/templates/flight_list.html:65
+msgid "Arrival Time"
+msgstr "Thời gian đến"
+
+#: booking/templates/flight_detail.html:38
+msgid "Back to Flight List"
+msgstr "Quay lại danh sách chuyến bay"
+
+#: booking/templates/flight_list.html:35
+#, fuzzy
+#| msgid "Flights"
+msgid "All Flights"
+msgstr "Các chuyến bay"
+
+#: booking/templates/flight_list.html:41
+msgid "Departure Date"
+msgstr "Ngày khởi hành"
+
+#: booking/templates/flight_list.html:45
+msgid "Departure Location"
+msgstr "Nơi khởi hành"
+
+#: booking/templates/flight_list.html:47
+msgid "All Locations"
+msgstr "Tất cả các địa điểm"
+
+#: booking/templates/flight_list.html:53
+msgid "Apply Filters"
+msgstr "Áp dụng bộ lọc"
+
+#: booking/templates/flight_list.html:61
+#, fuzzy
+#| msgid "Phone Number"
+msgid "Flight Number"
+msgstr "Số điện thoại"
+
+#: booking/templates/flight_list.html:62
+msgid "Departure City"
+msgstr "Thành phố khởi hành"
+
+#: booking/templates/flight_list.html:63
+msgid "Arrival City"
+msgstr "Thành phố đến"
+
+#: booking/templates/flight_list.html:66
+msgid "Price"
+msgstr "Giá vé"
+
+#: booking/templates/flight_list.html:67
+msgid "Details"
+msgstr "Chi tiết"
+
+#: booking/templates/flight_list.html:87
+#, fuzzy
+#| msgid "No flights available"
+msgid "No flights available."
+msgstr "Không có chuyến bay nào"
+
+#: booking/templates/homepage.html:9
 msgid "BOOK YOUR FLIGHT AT A REASONABLE PRICE"
 msgstr "ĐẶT VÉ MÁY BAY CỦA BẠN VỚI GIÁ CẢ HỢP LÝ"
 
-#: .\booking\templates\homepage.html:10
+#: booking/templates/homepage.html:10
 msgid "Get ready to take off with our budget-friendly flight options."
 msgstr ""
 "Hãy sẵn sàng để cất cánh trên những chuyến bay của chúng tôi với giá cả phải "
 "chăng."
 
-#: .\booking\templates\homepage.html:11
+#: booking/templates/homepage.html:13
 msgid "Sign in - Sign up"
 msgstr "Đăng nhập - Đăng ký"
 
-#: .\booking\templates\homepage.html:22
-msgid "Flights"
-msgstr "Các chuyến bay"
-
-#: .\booking\templates\homepage.html:26
-msgid "Round"
-msgstr "Khứ hồi"
-
-#: .\booking\templates\homepage.html:28
-msgid "Oneway"
-msgstr "Một chiều"
-
-#: .\booking\templates\homepage.html:33
-msgid "FROM:"
-msgstr "Từ:"
-
-#: .\booking\templates\homepage.html:36 .\booking\templates\homepage.html:51
-msgid "HaNoi"
-msgstr "Hà Nội"
-
-#: .\booking\templates\homepage.html:38 .\booking\templates\homepage.html:53
-msgid "DaNang"
-msgstr "Đà Nẵng"
-
-#: .\booking\templates\homepage.html:40 .\booking\templates\homepage.html:55
-msgid "HoChiMinh"
-msgstr "Hồ Chí Minh"
-
-#: .\booking\templates\homepage.html:48
-msgid "TO:"
-msgstr "Đến:"
-
-#: .\booking\templates\homepage.html:65
-msgid "DEPARTURE DATE"
-msgstr "Ngày khởi hành"
-
-#: .\booking\templates\homepage.html:76
-msgid "RETURN DATE"
-msgstr "Ngày trở về"
-
-#: .\booking\templates\homepage.html:89
-msgid "search"
-msgstr "Tìm kiếm"
-
-#: .\booking\templates\homepage.html:111
-msgid "No flights available"
-msgstr "Không có chuyến bay nào"
-
-#: .\booking\templates\homepage.html:113
-msgid "Please choose a different date or destination."
-msgstr "Xin vui lòng chọn 1 ngày hoặc điểm đến khác"
-
-#: .\booking\templates\homepage.html:128
-msgid "1.763.323 VND/customer"
-msgstr "1.763.323 VND/Khách"
-
-#: .\booking\templates\login.html:12
+#: booking/templates/login.html:12
 msgid "Log in for CheapJet"
 msgstr "Đăng nhập CheapJet"
 
-#: .\booking\templates\login.html:43
+#: booking/templates/login.html:43
 msgid "Don't have an account?"
 msgstr "Chưa có tài khoản?"
 
-#: .\booking\templates\login.html:43
+#: booking/templates/login.html:43
 msgid "Sign Up"
 msgstr "Đăng ký"
 
-#: .\booking\templates\register.html:12
+#: booking/templates/register.html:12
 msgid "Sign up for CheapJet"
 msgstr "Đăng ký CheapJet"
 
-#: .\booking\templates\register.html:57
+#: booking/templates/register.html:57
 msgid "Already have an account?"
 msgstr "Đã có tài khoản?"
 
-#: .\booking\templates\register.html:57
+#: booking/templates/register.html:57
 msgid "Log in"
 msgstr "Đăng nhập"
 
-#: .\booking\views.py:19
+#: booking/views.py:22
 msgid "You've been logged in successfully"
 msgstr "Bạn đã đăng nhập thành công"
 
-#: .\booking\views.py:22
+#: booking/views.py:25
 msgid "Invalid username and/or password"
 msgstr "Tên người dùng và/hoặc mật khẩu không hợp lệ"
 
-#: .\booking\views.py:25
+#: booking/views.py:28
 msgid ""
 "This username is not valid. Username should contain alphanumeric characters "
 "only."
 msgstr ""
 "Tên người dùng không hợp lệ. Tên người dùng chỉ chứa các ký tự chữ hoặc số."
 
-#: .\booking\views.py:43
+#: booking/views.py:46
 msgid "Username already exists"
 msgstr "Tên người dùng đã tồn tại"
 
-#: .\booking\views.py:49
+#: booking/views.py:52
 msgid "Information is not valid. Please check information again."
 msgstr "Thông tin không hợp lệ. Vui lòng kiểm tra lại."
 
-#: .\ticketbooking\settings.py:120
+#: booking/views.py:98
+msgid "Please select a departure airport."
+msgstr "Hãy chọn sân bay khởi hành."
+
+#: booking/views.py:100
+msgid "Please select an arrival airport."
+msgstr "Hãy chọn sân bay đến."
+
+#: booking/views.py:102
+msgid "Please select a departure date."
+msgstr "Hãy chọn ngày khởi hành."
+
+#: booking/views.py:104
+msgid "Please select a return date."
+msgstr "Hãy chọn ngày về."
+
+#: booking/views.py:106
+msgid "Please select a chair type."
+msgstr "Hãy chọn loại ghế."
+
+#: booking/views.py:108
+msgid "Please select the number of passengers."
+msgstr "Hãy chọn số lượng hành khách."
+
+#: booking/views.py:112
+msgid "Departure and destination airports cannot be the same."
+msgstr "Sân bay khởi hành và sân bay đến không thể giống nhau."
+
+#: booking/views.py:136
+msgid "No flights available with the selected criteria. Please try again."
+msgstr "Không có chuyến bay nào đáp ứng tiêu chí đã chọn. Vui lòng thử lại."
+
+#: booking/views.py:161
+msgid ""
+"No return flights available with the selected criteria. Please try again."
+msgstr "Không có chuyến bay khứ hồi nào đáp ứng tiêu chí đã chọn. Vui lòng thử lại."
+
+#: ticketbooking/settings.py:120
 msgid "English"
 msgstr "Tiếng Anh"
+
+#~ msgid ""
+#~ "No flights available. Please fill in the form correctly or choose another "
+#~ "date and destination."
+#~ msgstr ""
+#~ "Không có chuyến bay nào. Vui lòng điền chính xác vào mẫu hoặc chọn ngày "
+#~ "và điểm đến khác."
+
+#~ msgid "HaNoi"
+#~ msgstr "Hà Nội"
+
+#~ msgid "DaNang"
+#~ msgstr "Đà Nẵng"
+
+#~ msgid "HoChiMinh"
+#~ msgstr "Hồ Chí Minh"
+
+#~ msgid "Please choose a different date or destination."
+#~ msgstr "Xin vui lòng chọn 1 ngày hoặc điểm đến khác"
+
+#~ msgid "1.763.323 VND/customer"
+#~ msgstr "1.763.323 VND/Khách"
