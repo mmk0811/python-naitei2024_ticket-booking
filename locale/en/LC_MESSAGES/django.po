@@ -1,0 +1,292 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-19 10:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\booking\constants.py:7
+msgid "Male"
+msgstr ""
+
+#: .\booking\constants.py:8
+msgid "Female"
+msgstr ""
+
+#: .\booking\constants.py:9
+msgid "Other"
+msgstr ""
+
+#: .\booking\constants.py:13
+msgid "Active"
+msgstr ""
+
+#: .\booking\constants.py:14
+msgid "Suspended"
+msgstr ""
+
+#: .\booking\constants.py:18
+msgid "Admin"
+msgstr ""
+
+#: .\booking\constants.py:19
+msgid "Member"
+msgstr ""
+
+#: .\booking\constants.py:23
+msgid "Visa"
+msgstr ""
+
+#: .\booking\constants.py:24
+msgid "MasterCard"
+msgstr ""
+
+#: .\booking\constants.py:28
+msgid "Confirmed"
+msgstr ""
+
+#: .\booking\constants.py:29
+msgid "Canceled"
+msgstr ""
+
+#: .\booking\constants.py:33
+msgid "Credit Card"
+msgstr ""
+
+#: .\booking\constants.py:34
+msgid "PayPal"
+msgstr ""
+
+#: .\booking\forms.py:13 .\booking\forms.py:14 .\booking\forms.py:26
+#: .\booking\forms.py:27
+msgid "Username"
+msgstr ""
+
+#: .\booking\forms.py:18 .\booking\forms.py:19 .\booking\forms.py:40
+#: .\booking\forms.py:41
+msgid "Password"
+msgstr ""
+
+#: .\booking\forms.py:30 .\booking\forms.py:31
+msgid "Email"
+msgstr ""
+
+#: .\booking\forms.py:35 .\booking\forms.py:36
+msgid "Phone Number"
+msgstr ""
+
+#: .\booking\forms.py:45 .\booking\forms.py:46
+msgid "Confirm Password"
+msgstr ""
+
+#: .\booking\forms.py:59
+msgid "Password and confirm password are not the same."
+msgstr ""
+
+#: .\booking\models.py:21
+msgid "first name"
+msgstr ""
+
+#: .\booking\models.py:23
+msgid "last name"
+msgstr ""
+
+#: .\booking\models.py:29
+msgid "gender"
+msgstr ""
+
+#: .\booking\models.py:33 .\ticketbooking\settings.py:121
+msgid "Vietnamese"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:14
+msgid ""
+"Your adventure starts here—secure your flight at unbeatable prices today"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:24
+msgid "about CheapJet"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:26
+msgid "about us"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:27
+msgid "flighteer"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:28
+msgid "terms"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:28
+msgid "of booking"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:35
+msgid "team members"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:49
+msgid "registration"
+msgstr ""
+
+#: .\booking\templates\components\footer.html:52
+msgid "Sign up to receive the latest promotions"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:22
+msgid "home"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:23
+msgid "booking"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:24
+msgid "contact"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:26
+msgid "log in"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:28
+msgid "account"
+msgstr ""
+
+#: .\booking\templates\components\navigation.html:29
+msgid "log out"
+msgstr ""
+
+#: .\booking\templates\homepage.html:9
+msgid "BOOK YOUR FLIGHT AT A REASONABLE PRICE"
+msgstr ""
+
+#: .\booking\templates\homepage.html:10
+msgid "Get ready to take off with our budget-friendly flight options."
+msgstr ""
+
+#: .\booking\templates\homepage.html:11
+msgid "Sign in - Sign up"
+msgstr ""
+
+#: .\booking\templates\homepage.html:22
+msgid "Flights"
+msgstr ""
+
+#: .\booking\templates\homepage.html:26
+msgid "Round"
+msgstr ""
+
+#: .\booking\templates\homepage.html:28
+msgid "Oneway"
+msgstr ""
+
+#: .\booking\templates\homepage.html:33
+msgid "FROM:"
+msgstr ""
+
+#: .\booking\templates\homepage.html:36 .\booking\templates\homepage.html:51
+msgid "HaNoi"
+msgstr ""
+
+#: .\booking\templates\homepage.html:38 .\booking\templates\homepage.html:53
+msgid "DaNang"
+msgstr ""
+
+#: .\booking\templates\homepage.html:40 .\booking\templates\homepage.html:55
+msgid "HoChiMinh"
+msgstr ""
+
+#: .\booking\templates\homepage.html:48
+msgid "TO:"
+msgstr ""
+
+#: .\booking\templates\homepage.html:65
+msgid "DEPARTURE DATE"
+msgstr ""
+
+#: .\booking\templates\homepage.html:76
+msgid "RETURN DATE"
+msgstr ""
+
+#: .\booking\templates\homepage.html:89
+msgid "search"
+msgstr ""
+
+#: .\booking\templates\homepage.html:111
+msgid "No flights available"
+msgstr ""
+
+#: .\booking\templates\homepage.html:113
+msgid "Please choose a different date or destination."
+msgstr ""
+
+#: .\booking\templates\homepage.html:128
+msgid "1.763.323 VND/customer"
+msgstr ""
+
+#: .\booking\templates\login.html:12
+msgid "Log in for CheapJet"
+msgstr ""
+
+#: .\booking\templates\login.html:43
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\booking\templates\login.html:43
+msgid "Sign Up"
+msgstr ""
+
+#: .\booking\templates\register.html:12
+msgid "Sign up for CheapJet"
+msgstr ""
+
+#: .\booking\templates\register.html:57
+msgid "Already have an account?"
+msgstr ""
+
+#: .\booking\templates\register.html:57
+msgid "Log in"
+msgstr ""
+
+#: .\booking\views.py:19
+msgid "You've been logged in successfully"
+msgstr ""
+
+#: .\booking\views.py:22
+msgid "Invalid username and/or password"
+msgstr ""
+
+#: .\booking\views.py:25
+msgid ""
+"This username is not valid. Username should contain alphanumeric characters "
+"only."
+msgstr ""
+
+#: .\booking\views.py:43
+msgid "Username already exists"
+msgstr ""
+
+#: .\booking\views.py:49
+msgid "Information is not valid. Please check information again."
+msgstr ""
+
+#: .\ticketbooking\settings.py:120
+msgid "English"
+msgstr ""
