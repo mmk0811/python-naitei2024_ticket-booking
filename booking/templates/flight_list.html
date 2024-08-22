@@ -4,17 +4,15 @@
 
 {% block content %}
     <style>
-        .background-banner {
-            background-image: url("{% static 'images/welcome/welcome-banner.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            padding-top: 120px;
-            padding-bottom: 20px;
-            min-height: 100vh;
-        }
-
-        .model-form {
+        .list-form {
+            min-width: 100%;
             margin-bottom: 20px;
+            background-color: #fff;
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 50%;
+            transform: translateX(-50%);
         }
 
         .filter-form {
@@ -30,7 +28,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="model-form">
+                    <div class="list-form">
                         <div style="text-align: center">
                             <h3>{% trans "All Flights" %}</h3><br>
                         </div>

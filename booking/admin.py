@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Airport, Flight, Account, TicketType, FlightTicketType, Booking, Payment, Card, Voucher
+from .models import Airport, Flight, Account, TicketType, FlightTicketType, Booking, Payment, Card, Voucher, Passenger
 
 admin.site.register(Airport)
 @admin.register(Flight)
@@ -14,3 +14,4 @@ admin.site.register(Booking)
 admin.site.register(Payment)
 admin.site.register(Card)
 admin.site.register(Voucher)
+admin.site.register(Passenger)

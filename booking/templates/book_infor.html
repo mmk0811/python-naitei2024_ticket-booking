@@ -1,0 +1,83 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% load static %}
+
+{% block content %}
+<section class="section section1">
+    <form action="{% url 'payment' %}" method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <input type="hidden" name="numPassengers" value="{{num_passengers}}">
+        <input type="hidden" name="flight1" value="{{flight1.flight_id}}">
+        <input type="hidden" name="flight1Date" value='{{flight1ddate | date:"d-m-Y"}}'>
+        <input type="hidden" name="flight1Class" value="{{seat}}">
+        {% if flight2 %}
+            <input type="hidden" name="flight2" value="{{flight2.flight_id}}">
+            <input type="hidden" name="flight2Date" value='{{flight2ddate | date:"d-m-Y"}}'>
+            <input type="hidden" name="flight2Class" value="{{seat}}">
+        {% endif %}
+        <div class="navigation-back"></div>
+        {% if messages %}
+            <div class="container-sm padder">
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="alert">*{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+            </div>
+    {% endif %}
+        <div class="container">
+            <div class="col-lg-8">
+            {% include "components/ticketdetails.html" %}
+            {% include "components/contactdetail.html" %}
+            {% include "components/passengerdetails.html" %}
+            <div class="payment-btn">
+                <button type="submit" class="btn btn-primary btn-danger">{% trans "Proceed to payment" %}</button>
+            </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="price-details">
+                    <h5>{% trans "Fare Summary" %}</h5>
+                    <hr>
+                    <div class="base-fare">
+                        <div class="base-fare-label">{% trans "Base Fare" %}:</div>
+                        <div class="base-fare-value"><span>{{ price }}</span>VND</div>
+                    </div>
+                    <div class="surcharges">
+                        <div class="surcharges-label">{% trans "Number Of Passengers" %}:</div>
+                        <div class="surcharges-value"><span>{{ num_passengers }}</span></div>
+                    </div>
+                    <hr>
+                    <div class="total-fare">
+                        <div class="total-fare-label"><h5>{% trans "Total Fare" %}: </h5></div>
+                        <div class="total-fare-value">
+                            <span>{{ total_price }}</span>VND
+                        </div>
+                        <input type="hidden" name="totalCost" id="totalCost" value="{{ real_price }}">
+                    </div>
+                </div>
+                <div class="coupon-code">
+                    <h5>{% trans "Have a coupon code" %}?</h5>
+                    <hr>
+                    <div class="row base-fare">
+                        <div class="col-lg-9">
+                            <input type="text" name="coupon" class="form-control" placeholder="{% trans 'Coupon Code' %}" style="text-transform: uppercase;">
+                        </div>
+                        <div class="coupon-apply">
+                            <div class="custom-title">
+                                <button type="button" class="btn btn-primary btn-danger">{% trans "Apply" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg media-payment-btn">
+                <div>
+                    <button type="submit" class="btn btn-primary btn-danger">{% trans "Proceed to payment" %}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
