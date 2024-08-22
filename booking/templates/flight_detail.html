@@ -34,8 +34,6 @@
                         <p><strong>{% trans "Country" %}:</strong> {{ arrival_airport.country }}</p>
                         <p><strong>{% trans "Arrival Time" %}:</strong> {{ flight.arrival_time }}</p>
 
-                        <h3 class="price">{% trans "Base Price" %}: ${{ flight.base_price }}</h3>
-
                         <div class="btn-back">
                             <a href="{% url 'flight_list' %}" class="btn btn-secondary">{% trans "Back to Flight List" %}</a>
                         </div>
