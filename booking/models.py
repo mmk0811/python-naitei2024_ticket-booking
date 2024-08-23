@@ -17,7 +17,7 @@ class Account(AbstractUser):
     phone_number = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Member')
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     first_name = models.CharField(
         max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='New')
     last_name = models.CharField(
@@ -30,13 +30,13 @@ class Account(AbstractUser):
         verbose_name=_('gender')
     )
     date_of_birth = models.DateField(default=timezone.now)
-    passport_number = models.CharField(max_length=MAX_LENGTH_NAME, unique=True, default="N12345678")
-    nationality = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnamese'))
+    # passport_number = models.CharField(max_length=MAX_LENGTH_NAME)
+    # nationality = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnamese'))
 
     REQUIRED_FIELDS = ['email', 'phone_number']
 
     def set_status(self, new_status):
-        if new_status in dict(self.STATUS_CHOICES).keys():
+        if new_status in dict(STATUS_CHOICES).keys():
             self.status = new_status
             self.save()
 
@@ -44,7 +44,7 @@ class Account(AbstractUser):
         return self.status == 'Active'
 
     def get_role_display(self):
-        return dict(self.ROLE_CHOICES).get(self.role, 'Unknown')
+        return dict(ROLE_CHOICES).get(self.role, 'Unknown')
 
     def update_last_login(self):
         self.last_login = timezone.now()
@@ -154,11 +154,17 @@ class Booking(models.Model):
     flight_ticket_type = models.ForeignKey('FlightTicketType', on_delete=models.CASCADE)
     booking_date = models.DateTimeField(auto_now_add=True)
     seat_number = models.CharField(max_length=10)
-    status = models.CharField(max_length=10, choices=BOOKING_STATUS, default='Confirmed')
+    cancellation_approved = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=BOOKING_STATUS, default='Confirmed')
 
     def is_confirmed(self):
         """Check if the booking is confirmed."""
         return self.status == 'Confirmed'
+
+    def set_status(self, new_status):
+        if new_status in dict(BOOKING_STATUS).keys():
+            self.status = new_status
+            self.save()
 
     def total_cost(self):
         """Calculate the total cost of the booking."""
@@ -167,6 +173,31 @@ class Booking(models.Model):
     def __str__(self):
         return (f"Booking {self.booking_id} - {self.account.email} - "
                 f"{self.flight_ticket_type.flight.flight_number} - {self.seat_number}")
+    def request_cancellation(self):
+        """Request a booking cancellation."""
+        confirmed_status = dict(BOOKING_STATUS)['Confirmed']
+        pending_cancellation_status = dict(BOOKING_STATUS)['PendingCancellation']
+
+        if self.status == confirmed_status:
+            self.status = pending_cancellation_status
+            self.save()
+            return True, _("Cancellation request sent. Awaiting admin approval.")
+        else:
+            return False, _("Booking cannot be cancelled or is already in the cancellation process.")
+
+    def approve_cancellation(self):
+        """Admin approves the cancellation request."""
+        pending_cancellation_status = dict(BOOKING_STATUS)['PendingCancellation']
+        if self.status == pending_cancellation_status:
+            self.flight_ticket_type.release_seat()
+            
+            self.status = 'Cancelled'
+            self.save()
+            return True, _("Booking cancelled successfully.")
+        else:
+            return False, _("Cancellation cannot be approved. Current status is not PendingCancellation.")
+
+
 class Payment(models.Model):
     payment_id = models.AutoField(primary_key=True)
     booking = models.ForeignKey('Booking', on_delete=models.CASCADE)

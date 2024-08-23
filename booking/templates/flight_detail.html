@@ -22,7 +22,7 @@
                     <div class="flight-details">
                         <h1>{% trans "Flight" %} {{ flight.flight_number }}</h1>
 
-                        <h2>{% trans "Arrival Information" %}</h2>
+                        <h2>{% trans "Departure Information" %}</h2>
                         <p><strong>{% trans "Airport" %}:</strong> {{ departure_airport.name }}</p>
                         <p><strong>{% trans "City" %}:</strong> {{ departure_airport.city }}</p>
                         <p><strong>{% trans "Country" %}:</strong> {{ departure_airport.country }}</p>
@@ -35,7 +35,7 @@
                         <p><strong>{% trans "Arrival Time" %}:</strong> {{ flight.arrival_time }}</p>
 
                         <div class="btn-back">
-                            <a href="{% url 'flight_list' %}" class="btn btn-secondary">{% trans "Back to Flight List" %}</a>
+                            <a href="{% url 'flight' %}" class="btn btn-secondary">{% trans "Back to Flight List" %}</a>
                         </div>
                     </div>
                 </div>
