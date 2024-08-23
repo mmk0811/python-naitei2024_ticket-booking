@@ -27,6 +27,8 @@ CARD_TYPE_CHOICES = [
 BOOKING_STATUS = [
     ('Confirmed', _('Confirmed')),
     ('Canceled', _('Canceled')),
+    ('PendingCancellation', _('Pending Cancellation')),
+    ('DeniedCancellation', _('Denied Cancellation'))
 ]
 
 PAYMENT_METHOD_CHOICES = [
