@@ -9,6 +9,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Flight, Airport
 from django.db.models import Min, Q, F
 import json
+from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import timedelta
 
 # Create your views here.
 def login_view(request):
@@ -161,22 +163,59 @@ def flight_detail(request, flight_id):
 
 def flight_list(request):
     flights = Flight.objects.all()
-    
-    # Bộ lọc theo ngày khởi hành
     departure_date = request.GET.get('departure_date')
     if departure_date:
         flights = flights.filter(departure_time__date=departure_date)
-
-    # Bộ lọc theo địa điểm khởi hành
     departure_location = request.GET.get('departure_location')
     if departure_location:
         flights = flights.filter(departure_airport__city=departure_location)
-
-    # Lấy danh sách các thành phố từ model Airport
     airports = Airport.objects.values_list('city', flat=True).distinct()
-
     context = {
         'flights': flights,
         'airports': airports,
     }
     return render(request, 'flight_list.html', context)
+@login_required
+def user_bookings(request):
+    bookings = Booking.objects.filter(account=request.user)
+    return render(request, 'user_bookings.html', {'bookings': bookings})
+
+@login_required
+def cancel_booking(request, booking_id):
+    booking = get_object_or_404(Booking, booking_id=booking_id)
+
+    if booking.account != request.user:
+        messages.error(request, "You do not have permission to cancel this booking.")
+        return redirect('user_bookings')
+    
+    booking.set_status('PendingCancellation')
+    booking.save()
+    messages.success(request, "Your booking cancellation request has been submitted and is pending approval.")
+
+    return redirect('user_bookings')
+def is_admin(user):
+    return user.is_superuser
+@login_required
+@user_passes_test(is_admin)
+def pending_cancellations(request):
+    bookings = Booking.objects.filter(status="PendingCancellation")
+    return render(request, 'pending_cancellations.html', {'bookings': bookings})
+
+@login_required
+@user_passes_test(is_admin)
+def approve_cancellation(request, booking_id):
+    booking = get_object_or_404(Booking, booking_id=booking_id)
+    booking.set_status("Canceled")  
+    booking.save()
+    messages.success(request, "Cancellation approved successfully.")
+    return redirect('pending_cancellations')
+
+@login_required
+@user_passes_test(is_admin)
+def reject_cancellation(request, booking_id):
+    booking = get_object_or_404(Booking, booking_id=booking_id)
+    booking.set_status("DeniedCancellation")  
+    booking.save()
+    messages.success(request, "Cancellation rejected.")
+    return redirect('pending_cancellations')
+

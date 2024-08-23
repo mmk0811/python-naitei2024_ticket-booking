@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <style>
+        .background-banner {
+            background-image: url("{% static 'images/welcome/welcome-banner.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            padding-top: 120px;
+            padding-bottom: 20px;
+            min-height: 100vh;
+        }
+    </style>
+    <div class="background-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="model-form">
+                        <div style="text-align: center">
+                            <h3>{% trans "Pending Cancellations" %}</h3><br>
+                        </div>
+
+                        {% if bookings %}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">{% trans "Booking ID" %}</th>
+                                            <th scope="col">{% trans "Flight Number" %}</th>
+                                            <th scope="col">{% trans "Booking Date" %}</th>
+                                            <th scope="col">{% trans "Status" %}</th>
+                                            <th scope="col">{% trans "Actions" %}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in bookings %}
+                                            <tr>
+                                                <td>{{ booking.booking_id }}</td>
+                                                <td>{{ booking.flight_ticket_type.flight.flight_number }}</td>
+                                                <td>{{ booking.booking_date }}</td>
+                                                <td>{{ booking.status }}</td>
+                                                <td>
+                                                    <a href="{% url 'approve_cancellation' booking_id=booking.booking_id %}" class="btn btn-approve">
+                                                        {% trans "Approve" %}
+                                                    </a>
+                                                    <a href="{% url 'reject_cancellation' booking_id=booking.booking_id %}" class="btn btn-reject">
+                                                        {% trans "Reject" %}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div style="text-align: center">
+                                <p>{% trans "No pending cancellations." %}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

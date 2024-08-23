@@ -851,3 +851,109 @@ nav.navbar.bootsnav .navbar-toggle i{color: #4e4ffa;}
     display: block;
     text-align: center;
 }
+.model-form {
+    margin-bottom: 20px;
+}
+
+.filter-form {
+            margin-bottom: 20px;
+}
+
+.filter-form select,
+.filter-form input {
+    margin-right: 10px;
+}
+
+.table-responsive {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-approve,
+.btn-reject {
+    padding: 5px 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    margin-right: 5px;
+}
+
+.btn-approve {
+    background-color: #28a745;
+}
+
+.btn-approve:hover {
+    background-color: #218838;
+}
+
+.btn-reject {
+    background-color: #dc3545;
+}
+
+.btn-reject:hover {
+    background-color: #c82333;
+}
+
+
+.model-form {
+    margin-bottom: 20px;
+}
+
+.filter-form {
+    margin-bottom: 20px;
+}
+
+.filter-form select,
+.filter-form input {
+    margin-right: 10px;
+}
+
+.table-responsive {
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
