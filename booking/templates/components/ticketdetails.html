@@ -1,0 +1,73 @@
+{% load i18n %}
+
+<div class="ticket-details">
+    <h5>{% trans "Ticket Details" %}</h5>
+    <hr>
+    <div class="media-airline">
+        <div>
+            <div class="brand-name">{{flight1.airline}}</div>
+            <div class="plane-name">{{flight1.flight_number}}</div>
+        </div>
+    </div>
+    <div class="row ticket-details-div">
+        <div class="col-lg-3 airline-name">
+            <div class="brand-name">{{flight1.airline}}</div>
+            <div class="plane-name">{{flight1.flight_number}}</div>
+        </div>
+        <div class="col-lg-3 depart-time">
+            <div class="time">{{flight1.departure_time | time:'H:i'}}</div>
+            <div class="date ddate" data-value='{{flight1ddate | date:"d-m-Y"}}'>{{flight1ddate | date:"D, d M y"}}</div>
+            <div class="place">{{flight1.departure_airport.city}}</div>
+            <div class="airport">{{flight1.departure_airport.name}}</div>
+        </div>
+        <div class="col-lg-3 time-details">
+            <div class="duration" data-value="{{1}}"></div>
+        </div>
+        <div class="col-lg-3 arrival-time">
+            <div class="time">{{flight1.arrival_time | time:'H:i'}}</div>
+            <div class="date adate" data-value='{{flight1adate | date:"d-m-Y"}}'>{{flight1adate | date:"D, d M y"}}</div>
+            <div class="place">{{flight1.arrival_airport.city}}</div>
+            <div class="airport">{{flight1.arrival_airport.name}}</div>
+        </div>
+    </div>
+    {% if flight2 %}
+        <!--Round Trip-->
+        <div style="padding: 0 15px;" class="round-seperator"><hr style="border-top: 0.5px dashed rgba(0,0,0,.1);"></div>
+        <!--/Round Trip-->
+        <div class="media-airline">
+            <div>
+                <div class="brand-name">{{flight2.airline}}</div>
+                <div class="plane-name">{{flight2.flight_number}}</div>
+            </div>
+        </div>
+        <div class="row ticket-details-div">
+            <div class="col-lg-3 airline-name">
+                <div class="brand-name">{{flight2.airline}}</div>
+                <div class="plane-name">{{flight2.flight_number}}</div>
+            </div>
+            <div class="col-lg-3 depart-time">
+                <div class="time">{{flight2.departure_time | time:'H:i'}}</div>
+                <div class="date ddate">{{flight2ddate | date:"D, d M y"}}</div>
+                <div class="place">{{flight2.departure_airport.city}}</div>
+                <div class="airport">{{flight2.departure_airport.name}}</div>
+            </div>
+            <div class="col-lg-3 time-details">
+                <div class="duration" data-value="{{1}}"></div>
+            </div>
+            <div class="col-lg-3 arrival-time">
+                <div class="time">{{flight2.arrival_time | time:'H:i'}}</div>
+                <div class="date adate">{{flight2adate | date:"D, d M y"}}</div>
+                <div class="place">{{flight2.arrival_airport.city}}</div>
+                <div class="airport">{{flight2.arrival_airport.name}}</div>
+            </div>
+        </div>
+    {% endif %}
+    <hr>
+    <div class="baggage-details">
+
+        <svg width="1em" height="1.5em" viewBox="0 3 16 16" class="bi bi-bag" fill="currentcol-lgor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+        </svg> 
+        <p>30 Kgs Check-in, 7 Kgs Cabin</p>
+    </div>
+</div>

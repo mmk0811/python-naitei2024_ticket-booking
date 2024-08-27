@@ -18,4 +18,7 @@ urlpatterns = [
     path('approve-cancellation/<int:booking_id>/', approve_cancellation, name='approve_cancellation'),
     path('reject-cancellation/<int:booking_id>/', reject_cancellation, name='reject_cancellation'),
     
+    path('review', views.book_infor_view, name='book_infor'),
+    path('payment', views.payment_view, name='payment'),
+    path('process', views.process_view, name='process'),
 ]

@@ -1,17 +1,18 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
 
+{% load static %}
 {% block content %}
 <!-- welcome start -->
 <section id="home" class="welcome">
     <div class="container">
         <div class="welcome-txt">
             <h2>{% trans "BOOK YOUR FLIGHT AT A REASONABLE PRICE" %}</h2>
-            <p> {% trans "Get ready to take off with our budget-friendly flight options." %} </p>
-            {% if not user.is_authenticated %}
+            <p> {% trans "Get ready to take off with our budget-friendly flight options." %} </p> 
+            {% if not user.is_authenticated %} 
             <a href="{% url 'login' %}">
                 <button class="welcome-btn">{% trans "Sign in - Sign up" %}</button>
-            </a>
+            </a> 
             {% endif %}
         </div>
     </div>
@@ -22,83 +23,144 @@
 
 <!--booking start -->
 <section id="booking" class="booking">
-    <div class="container">
-        <div class="booking-content">
-            {% if error_message %}
-            <div class="row">
-                <div class="single-booking-item">
-                    <div class="single-booking-icon">
-                        <i class="flaticon-arrow-down-angle"></i>
-                    </div>
-                    <p>
-                        {{ error_message }}
-                    </p>
+  <div class="container">
+    <div class="booking-content">
+        {% if error_message %}
+        <div class="row">
+            <div class="single-booking-item">
+                <div class="single-booking-icon">
+                    <i class="flaticon-arrow-down-angle"></i>
                 </div>
+                <p>
+                    No flights available. Please try again.
+                </p>
             </div>
-            {% else %}
-            <div class="row">
-                <div class="single-booking-item">
-                    <div class="single-booking-icon">
-                        <i class="flaticon-arrow-down-angle"></i>
-                    </div>
-                    <h2>{{ from_airport }} --- {{ to_airport }}</h2>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="single-booking-item">
+                <div class="single-booking-icon">
+                    <i class="flaticon-arrow-down-angle"></i>
                 </div>
+                <h2>{{ from_airport }} --- {{ to_airport }}</h2>
             </div>
-            <div class="row">
-                {% if departure_flights %}
-                {% for flight in departure_flights %}
-                <div class="col-md-6">
-                    <div class="single-booking-item">
-                        <h2>
-                            <a href="#">
-                                <h2>{{ flight.departure_time|date:"d/m/Y g:i A" }} - {{ flight.arrival_time|date:"d/m/Y g:i A" }}
-                                </h2>
-                                <h2>{{ flight.departure_airport }} --- {{ flight.arrival_airport }}</h2>
-                            </a>
+        </div>
+        <div class="row">
+            {% if departure_flights %}
+            {% for flight in departure_flights %}
+            <div class="col-md-6">
+                <div class="single-booking-item d-single-item" onclick="selectFlight('departure', '{{ flight.flight_id }}', '{{ flight.departure_time }}', '{{ flight.arrival_time }}', '{{ flight.departure_airport }}', '{{ flight.arrival_airport }}', '{{ flight.ticket_type_price }}')" >
+                    <h2>
+                        <h2>{{ flight.departure_time|date:"d/m/Y g:i A" }} - {{ flight.arrival_time|date:"d/m/Y g:i A" }}
                         </h2>
-                        <i class="material-icons">&#xe7fd;</i>
-                        {{ flight.ticket_type_price }}
+                        <h2>{{ flight.departure_airport.airport_code }} --- {{ flight.arrival_airport.airport_code }}</h2>
+                    </h2>
+                    <div class="feature-display">
+                        <i class="material-icons rescale">&#xe227;</i>
+                        <p>{{ flight.ticket_type_price }} (VND)</p>
+                    </div>
+                    <div class="feature-display">
+                        <i class="material-icons rescale">&#xe7fd;</i>
+                        <p>{{ flight.ticket_type_available_seats }} ({% trans "Available Seats" %}) </p>
                     </div>
                 </div>
-                {% endfor %}
-                {% endif %}
             </div>
-            {% if trip_type == 'round' %}
-            <div class="row">
-                <div class="single-booking-item">
-                    <div class="single-booking-icon">
-                        <i class="flaticon-arrow-down-angle"></i>
-                    </div>
-                    <h2>{{ to_airport }} --- {{ from_airport }}</h2>
-                </div>
-            </div>
-            <div class="row">
-                {% if return_flights %}
-                {% for flight in return_flights %}
-                <div class="col-md-6">
-                    <div class="single-booking-item">
-                        <h2>
-                            <a href="#">
-                                <h2>{{ flight.departure_time|date:"d/m/Y g:i A" }} - {{ flight.arrival_time|date:"d/m/Y g:i A" }}
-                                </h2>
-                                <h2>{{ flight.departure_airport }} --- {{ flight.arrival_airport }}</h2>
-                            </a>
-                        </h2>
-                        <i class="material-icons">&#xe7fd;</i>
-                        {{ flight.ticket_type_price }}
-                    </div>
-                </div>
-                {% endfor %}
-                {% endif %}
-            </div>
+            {% endfor %}
             {% endif %}
         </div>
+        {% if trip_type == 'round' %}
+        <div class="row">
+            <div class="single-booking-item">
+                <div class="single-booking-icon">
+                    <i class="flaticon-arrow-down-angle"></i>
+                </div>
+                <h2>{{ to_airport }} --- {{ from_airport }}</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% if return_flights %}
+            {% for flight in return_flights %}
+            <div class="col-md-6">
+                <div class="single-booking-item r-single-item" onclick="selectFlight('return', '{{ flight.flight_id }}', '{{ flight.departure_time }}', '{{ flight.arrival_time }}', '{{ flight.departure_airport }}', '{{ flight.arrival_airport }}', '{{ flight.ticket_type_price }}')">
+                    <h2>
+                        <h2>{{ flight.departure_time|date:"d/m/Y g:i A" }} - {{ flight.arrival_time|date:"d/m/Y g:i A" }}
+                        </h2>
+                        <h2>{{ flight.departure_airport.airport_code }} --- {{ flight.arrival_airport.airport_code }}</h2>
+                    </h2>
+                    <div class="feature-display">
+                        <i class="material-icons rescale">&#xe227;</i>
+                        <p>{{ flight.ticket_type_price }} (VND)</p>
+                    </div>
+                    <div class="feature-display">
+                        <i class="material-icons rescale">&#xe7fd;</i>
+                        <p>{{ flight.ticket_type_available_seats }} ({% trans "Available Seats" %}) </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endif %}
+        {% endif %}
+        </div>
     </div>
-    {% endif %}
+  <!--/.container-->
+</section>
+
+<div id="selected-flight-info" class="bottom-bar">
+    <div id="departure">
+        <h2>{% trans "Departure Flight" %}: </h2>
+        <br>
+        <p id="d-flight-id" style="display:none;"></p>
+        <div>
+            <p class="inline-title">{% trans "Time" %}: </p>
+            <p class="inline-title" id="d-flight-time"></p>
+        </div>
+        <div>
+            <p class="inline-title">{% trans "Airport" %}: </p>
+            <p class="inline-title" id="d-flight-airports"></p>
+        </div>
+        <div>
+            <p class="inline-title">{% trans "Price" %}: </p>
+            <p class="inline-title" id="d-flight-price"></p>
+            <p class="inline-title">VND</p>
+        </div>
     </div>
+    <div id="return">
+        <h2>{% trans "Return Flight" %}: </h2>
+        <br>
+        <p id="r-flight-id" style="display:none;"></p>
+        <div>
+            <p class="inline-title">{% trans "Time" %}: </p>
+            <p class="inline-title" id="r-flight-time"></p>
+        </div>
+        <div>
+            <p class="inline-title">{% trans "Airport" %}: </p>
+            <p class="inline-title" id="r-flight-airports"></p>
+        </div>
+        <div>
+            <p class="inline-title">{% trans "Price" %}: </p>
+            <p class="inline-title" id="r-flight-price"></p>
+            <p class="inline-title">VND</p>
+        </div>
     </div>
-    </div>
-    </div><!--/.container-->
-</section><!--/.booking-->
-<!--booking end-->
+    <form id="send-info-form" action="{% url 'book_infor' %}" method="GET">
+        <input type="hidden" name="d_flight_id" id="d-form-flight-id">
+        <input type="hidden" name="r_flight_id" id="r-form-flight-id">
+        <input type="hidden" name="flight_ticket_type" id="form-flight-ticket-type">
+        <input type="hidden" name="num_passengers" id="form-num-passengers">
+        <button id="send-info" type="button" class="btn welcome-btn submit-btn">
+            <p>
+                {% trans "Continue" %} 
+                <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 800 750" width="20px" fill="#FFF">
+                    <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"/>
+                </svg>
+            </p>
+        </button>
+    </form>
+</div>
+<!--/.booking-->
+<!--booking end--> 
+<script src="{% static 'js/homepage.js' %}"></script>
+
 {% endblock %}

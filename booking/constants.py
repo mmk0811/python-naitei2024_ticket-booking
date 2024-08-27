@@ -27,8 +27,8 @@ CARD_TYPE_CHOICES = [
 BOOKING_STATUS = [
     ('Confirmed', _('Confirmed')),
     ('Canceled', _('Canceled')),
-    ('PendingCancellation', _('Pending Cancellation')),
-    ('DeniedCancellation', _('Denied Cancellation'))
+    ('PendingCancellation', _('PendingCancellation')),
+    ('DeniedCancellation', _('DeniedCancellation'))
 ]
 
 PAYMENT_METHOD_CHOICES = [
@@ -37,3 +37,11 @@ PAYMENT_METHOD_CHOICES = [
 ]
 
 REGEX_PATTERN = r"^[\w]+$"
+
+REGEX_PATTERN_NAME = r"^[a-zA-Z ]+$"
+
+REGEX_PATTERN_NUMBER = r"^[0-9]+$"
+
+REGEX_PATTERN_EMAIL = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+
+PRICE_FORMAT = '{:,.0f}'

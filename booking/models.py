@@ -2,7 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .constants import (
     MAX_LENGTH_NAME, GENDER_CHOICES, MAX_LENGTH_CHOICES, BOOKING_STATUS,
-    STATUS_CHOICES, ROLE_CHOICES, CARD_TYPE_CHOICES, PAYMENT_METHOD_CHOICES
+    STATUS_CHOICES, ROLE_CHOICES, CARD_TYPE_CHOICES, PAYMENT_METHOD_CHOICES, 
+    REGEX_PATTERN, REGEX_PATTERN_NAME, REGEX_PATTERN_NUMBER, REGEX_PATTERN_EMAIL
 )
 from django.utils import timezone
 from django.core.validators import RegexValidator, MinLengthValidator
@@ -12,16 +13,16 @@ from django.db.models import Min, Q, F
 
 class Account(AbstractUser):
     account_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=MAX_LENGTH_NAME, unique=True, validators=[MinLengthValidator(6), RegexValidator(regex=r"^[\w]+$")])
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=20)
+    username = models.CharField(max_length=MAX_LENGTH_NAME, unique=True, validators=[MinLengthValidator(6), RegexValidator(regex=REGEX_PATTERN)])
+    email = models.EmailField(validators=[RegexValidator(regex=REGEX_PATTERN_EMAIL)])
+    phone_number = models.CharField(max_length=20, validators=[RegexValidator(regex=REGEX_PATTERN_NUMBER)])
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
     first_name = models.CharField(
-        max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='New')
+        max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='New', validators=[RegexValidator(regex=REGEX_PATTERN_NAME)])
     last_name = models.CharField(
-        max_length=MAX_LENGTH_NAME, verbose_name=_('last name'), default='User')
+        max_length=MAX_LENGTH_NAME, verbose_name=_('last name'), default='User', validators=[RegexValidator(regex=REGEX_PATTERN_NAME)])
     gender = models.CharField(
         max_length=MAX_LENGTH_CHOICES,
         choices=GENDER_CHOICES,
@@ -30,8 +31,6 @@ class Account(AbstractUser):
         verbose_name=_('gender')
     )
     date_of_birth = models.DateField(default=timezone.now)
-    # passport_number = models.CharField(max_length=MAX_LENGTH_NAME)
-    # nationality = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnamese'))
 
     REQUIRED_FIELDS = ['email', 'phone_number']
 
@@ -73,6 +72,7 @@ class Airport(models.Model):
 class Flight(models.Model):
     flight_id = models.AutoField(primary_key=True)
     flight_number = models.CharField(max_length=MAX_LENGTH_NAME)
+    airline = models.CharField(max_length=MAX_LENGTH_NAME, blank=True)
     departure_airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='departures')
     arrival_airport = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrivals')
     departure_time = models.DateTimeField()
@@ -107,13 +107,13 @@ class FlightTicketType(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available_seats = models.IntegerField()
 
-    def is_seat_available(self):
+    def is_seat_available(self, quantity):
         """Check if there are any available seats."""
-        return self.available_seats
+        return self.available_seats >= quantity
 
     def book_seat(self, quantity=1):
         """Book seats if available."""
-        if self.is_seat_available():
+        if self.is_seat_available(quantity):
             self.available_seats -= quantity
             self.save()
             return True
@@ -131,8 +131,8 @@ class FlightTicketType(models.Model):
 class Card(models.Model):
     card_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('Account', on_delete=models.CASCADE)
-    card_number = models.CharField(max_length=16)
-    cardholder_name = models.CharField(max_length=MAX_LENGTH_NAME)
+    card_number = models.CharField(max_length=20, validators=[RegexValidator(regex=REGEX_PATTERN_NUMBER)])
+    cardholder_name = models.CharField(max_length=MAX_LENGTH_NAME, validators=[RegexValidator(regex=REGEX_PATTERN_NAME)])
     expiry_date = models.DateField()
     card_type = models.CharField(max_length=10, choices=CARD_TYPE_CHOICES)
     billing_address = models.CharField(max_length=MAX_LENGTH_NAME)
@@ -148,6 +148,24 @@ class Card(models.Model):
     def __str__(self):
         return f"{self.cardholder_name} ({self.masked_card_number()}) - {self.get_card_type_display()}"
 
+class Passenger(models.Model):
+    passenger_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='New', validators=[RegexValidator(regex=REGEX_PATTERN_NAME)])
+    last_name = models.CharField(max_length=MAX_LENGTH_NAME, verbose_name=_('first name'), default='Passenger', validators=[RegexValidator(regex=REGEX_PATTERN_NAME)])
+    gender = models.CharField(
+        max_length=MAX_LENGTH_CHOICES,
+        choices=GENDER_CHOICES,
+        blank=True,
+        null=True,
+        verbose_name=_('gender')
+    )
+    date_of_birth = models.DateField(default=timezone.now)
+    passport_number = models.CharField(max_length=MAX_LENGTH_NAME, default="N12345678", validators=[RegexValidator(regex=REGEX_PATTERN)])
+    nationality = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnamese'))
+    passport_from_country = models.CharField(max_length=MAX_LENGTH_NAME, default=_('Vietnam'))
+    due_date = models.DateField(default=timezone.now)
+
+
 class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     account = models.ForeignKey('Account', on_delete=models.CASCADE)
@@ -155,7 +173,8 @@ class Booking(models.Model):
     booking_date = models.DateTimeField(auto_now_add=True)
     seat_number = models.CharField(max_length=10)
     cancellation_approved = models.BooleanField(default=False)
-    status = models.CharField(max_length=20, choices=BOOKING_STATUS, default='Confirmed')
+    status = models.CharField(max_length=20, choices=BOOKING_STATUS, default='PendingCancellation')
+    passengers = models.ManyToManyField(Passenger, related_name='flight_tickets')
 
     def is_confirmed(self):
         """Check if the booking is confirmed."""
@@ -189,7 +208,7 @@ class Booking(models.Model):
         """Admin approves the cancellation request."""
         pending_cancellation_status = dict(BOOKING_STATUS)['PendingCancellation']
         if self.status == pending_cancellation_status:
-            self.flight_ticket_type.release_seat()
+            self.flight_ticket_type.release_seat(int(self.seat_number))
             
             self.status = 'Cancelled'
             self.save()
